@@ -1,0 +1,109 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 Biswodip Goj — Biswodip Goj Unified Engineering
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: verify · ${{ matrix.os }} · node ${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: ['18.20', '20', '22']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Package self-verification
+        run: node bin/biswodip.mjs verify-package --verbose
+
+      - name: Unit tests
+        run: node --test test/tooling.test.mjs
+
+      - name: Installer dry run
+        run: node bin/biswodip.mjs install --root . --dry-run
+
+      - name: Offline install into a scratch project
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/scratch"
+          node bin/biswodip.mjs install --root "$RUNNER_TEMP/scratch" --offline --agent claude-code
+          node bin/biswodip.mjs verify --root "$RUNNER_TEMP/scratch" --verbose
+          test -f "$RUNNER_TEMP/scratch/.biswodip/integrations.lock.json"
+
+      - name: /dip entry layer installed
+        shell: bash
+        run: |
+          test -f "$RUNNER_TEMP/scratch/.claude/commands/dip.md"
+          test -f "$RUNNER_TEMP/scratch/.claude/commands/dip/security.md"
+          test -f "$RUNNER_TEMP/scratch/.claude/agents/dip.md"
+
+      - name: Handoff file lifecycle
+        shell: bash
+        run: |
+          node bin/biswodip.mjs handoff init --root "$RUNNER_TEMP/scratch" --title ci-demo
+          node bin/biswodip.mjs handoff update --root "$RUNNER_TEMP/scratch"
+          grep -q "## 5) Failed attempts" "$RUNNER_TEMP/scratch/handoff.md"
+
+      - name: Skill catalogue and context budget
+        run: node bin/biswodip.mjs skills
+
+      - name: Strix guard refuses a non-loopback target
+        shell: bash
+        run: |
+          set +e
+          node bin/biswodip.mjs strix --root . --app-url https://example.com --dry-run
+          code=$?
+          set -e
+          if [ "$code" != "6" ]; then echo "expected REFUSED (6), got $code"; exit 1; fi
+
+      - name: Security gates on this repository
+        run: node bin/biswodip.mjs gates --root . --exclude upstream --exclude skills --fail-on high
+
+  live-clone:
+    name: live clone of every upstream repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Clone all five upstream repositories at their pinned commits
+        run: node bin/biswodip.mjs install --root "$RUNNER_TEMP/live" --pinned --no-skills
+      - name: Verify the clones
+        run: node bin/biswodip.mjs verify --root "$RUNNER_TEMP/live" --pinned --verbose
+
+  shellcheck:
+    name: shell and PowerShell lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: shellcheck
+        run: |
+          sudo apt-get update && sudo apt-get install -y shellcheck
+          shellcheck -S warning scripts/*.sh integrations/strix/*.sh
+      - name: PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module PSScriptAnalyzer -Force -Scope CurrentUser
+          $issues = Invoke-ScriptAnalyzer -Path . -Recurse -Severity Error,Warning -ExcludeRule PSAvoidUsingWriteHost |
+            Where-Object { $_.ScriptPath -notmatch 'upstream' }
+          $issues | Format-Table -AutoSize
+          if ($issues | Where-Object Severity -eq 'Error') { exit 1 }

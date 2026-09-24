@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="Biswodip Goj — Unified Engineering: discover, plan, implement, verify, attack, fix, score, release">
+  <title>Biswodip Goj — Unified Engineering</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B1220"/>
+      <stop offset="55%" stop-color="#101B2E"/>
+      <stop offset="100%" stop-color="#15243C"/>
+    </linearGradient>
+    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="45%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <style>
+      .f { font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="320" fill="url(#bg)"/>
+  <g stroke="#7DD3FC" stroke-opacity="0.05">
+    <path d="M0 80h1280M0 160h1280M0 240h1280"/>
+    <path d="M320 0v320M640 0v320M960 0v320"/>
+  </g>
+  <rect x="0" y="0" width="6" height="320" fill="url(#edge)"/>
+
+  <text class="f mono" x="64" y="72" fill="#22D3EE" font-size="15" letter-spacing="4.5">EVIDENCE · NOT CLAIMS</text>
+  <text class="f" x="62" y="140" fill="#F8FAFC" font-size="52" font-weight="700" letter-spacing="-0.6">BISWODIP GOJ</text>
+  <text class="f" x="62" y="188" fill="#93A4C0" font-size="34" font-weight="500" letter-spacing="0.4">Unified Production Engineering System</text>
+  <rect x="64" y="212" width="520" height="2" fill="url(#rule)"/>
+
+  <text class="f mono" x="64" y="252" fill="#CBD5E1" font-size="15.5" letter-spacing="0.6">DISCOVER → PLAN → IMPLEMENT → VERIFY → ATTACK → FIX → REGRESS → SCORE → RELEASE</text>
+  <text class="f" x="64" y="284" fill="#64748B" font-size="14.5">Taste · Emil Kowalski · No AI Slop · Headroom · Strix — orchestrated under one release gate</text>
+
+  <g transform="translate(980 96)">
+    <rect x="0" y="0" width="236" height="128" rx="14" fill="#0F1B2E" stroke="#1E3A5F"/>
+    <text class="f mono" x="20" y="32" fill="#64748B" font-size="12" letter-spacing="2">RELEASE GATE</text>
+    <text class="f" x="20" y="72" fill="#F8FAFC" font-size="34" font-weight="700">100</text>
+    <text class="f" x="72" y="72" fill="#64748B" font-size="16">weighted points</text>
+    <g font-size="12" class="f mono">
+      <circle cx="26" cy="98" r="4" fill="#22C55E"/><text x="38" y="102" fill="#94A3B8">VERIFIED</text>
+      <circle cx="116" cy="98" r="4" fill="#F59E0B"/><text x="128" y="102" fill="#94A3B8">UNVERIFIED</text>
+      <circle cx="26" cy="116" r="4" fill="#EF4444"/><text x="38" y="120" fill="#94A3B8">BLOCKED</text>
+      <circle cx="116" cy="116" r="4" fill="#64748B"/><text x="128" y="120" fill="#94A3B8">OPEN</text>
+    </g>
+  </g>
+</svg>

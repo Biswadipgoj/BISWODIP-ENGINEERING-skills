@@ -1,0 +1,73 @@
+{
+  "name": "biswodip-goj-unified-engineering",
+  "version": "2.2.0",
+  "description": "Biswodip Goj's evidence-driven production engineering system for AI coding agents: discover, plan, threat model, implement, verify, attack, fix, regress, score and release-gate a repository \u2014 integrating Taste, Emil Kowalski, No AI Slop, Headroom and Strix.",
+  "author": "Biswodip Goj",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/Biswadipgoj",
+  "type": "module",
+  "private": false,
+  "keywords": [
+    "ai-agent",
+    "claude-code",
+    "skill",
+    "security",
+    "pentest",
+    "strix",
+    "headroom",
+    "code-review",
+    "release-gate",
+    "production-readiness"
+  ],
+  "bin": {
+    "biswodip": "bin/biswodip.mjs",
+    "dip": "bin/biswodip.mjs"
+  },
+  "files": [
+    "MASTER-PROMPT.md",
+    "ARCHITECTURE.md",
+    "START-HERE.md",
+    "skills",
+    "skills-src",
+    "templates",
+    "lifecycle",
+    "security",
+    "references",
+    "reports",
+    "integrations",
+    "scripts",
+    "bin",
+    "docs",
+    "handoff.md",
+    "install.sh",
+    "install.ps1",
+    "LICENSE",
+    "NOTICE",
+    "THIRD-PARTY-NOTICES.md",
+    "README.md",
+    "CHANGELOG.md",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "detect": "node bin/biswodip.mjs detect",
+    "install-integrations": "node bin/biswodip.mjs install",
+    "verify": "node bin/biswodip.mjs verify-package",
+    "gates": "node bin/biswodip.mjs gates",
+    "doctor": "node bin/biswodip.mjs doctor",
+    "build-skill": "node bin/biswodip.mjs build-skill",
+    "refresh-snapshots": "node bin/biswodip.mjs refresh-snapshots",
+    "test": "node --test test/tooling.test.mjs",
+    "handoff": "node bin/biswodip.mjs handoff",
+    "skills": "node bin/biswodip.mjs skills"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Biswadipgoj/BISWODIP-GOJ-UNIFIED-ENGINEERING.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Biswadipgoj/BISWODIP-GOJ-UNIFIED-ENGINEERING/issues"
+  }
+}

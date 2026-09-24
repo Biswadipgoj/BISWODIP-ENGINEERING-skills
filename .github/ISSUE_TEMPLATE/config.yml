@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability in this package
+    url: https://github.com/Biswadipgoj/BISWODIP-GOJ-UNIFIED-ENGINEERING/security/advisories/new
+    about: Report privately. Do not open a public issue with exploitable detail.
+  - name: Issue with an upstream project (Taste, Emil Kowalski, No AI Slop, Headroom, Strix)
+    url: https://github.com/Biswadipgoj/BISWODIP-GOJ-UNIFIED-ENGINEERING/blob/main/THIRD-PARTY-NOTICES.md
+    about: Those projects are vendored unmodified — report to their own maintainers.

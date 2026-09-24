@@ -1,0 +1,61 @@
+{
+  "$comment": "Exact source snapshots of every upstream repository (git archive of the recorded commit, .git removed). Owned by their respective authors; see THIRD-PARTY-NOTICES.md.",
+  "generatedAt": "2026-09-23T09:12:50.946Z",
+  "snapshots": [
+    {
+      "id": "taste",
+      "name": "Taste Skill",
+      "repo": "https://github.com/Leonxlnx/taste-skill.git",
+      "dir": "upstream/taste-skill",
+      "commit": "5217fb45be2c0b302f29c9cd31cbd3237501c684",
+      "committedAt": "2026-09-20T18:26:24+02:00",
+      "license": "MIT",
+      "files": 65,
+      "treeSha256": "afb7e38fbb72719b91dbe4d58a4a97ce4f8c18b0ae544a45e46111d5eb7a2743"
+    },
+    {
+      "id": "emilkowalski",
+      "name": "Emil Kowalski Skills",
+      "repo": "https://github.com/emilkowalski/skills.git",
+      "dir": "upstream/emilkowalski-skills",
+      "commit": "85e8e2363b713506e1d5b6e07a0eb2da66be1bc3",
+      "committedAt": "2026-09-15T17:52:10+02:00",
+      "license": "MIT",
+      "files": 26,
+      "treeSha256": "eee99654f6d1668d04c152c4a947a30cef0dee7b06bee5b467636b4be11df7a3"
+    },
+    {
+      "id": "headroom",
+      "name": "Headroom",
+      "repo": "https://github.com/headroomlabs-ai/headroom.git",
+      "dir": "upstream/headroom",
+      "commit": "94206e265203acfd72a3b939e9a964e29175ad50",
+      "committedAt": "2026-09-21T18:47:42-05:00",
+      "license": "Apache-2.0",
+      "files": 2411,
+      "treeSha256": "b11f8586560004d5b59fa7307893e72b89714fb81478ea84e02be3fe6e3246c3"
+    },
+    {
+      "id": "strix",
+      "name": "Strix",
+      "repo": "https://github.com/usestrix/strix.git",
+      "dir": "upstream/strix",
+      "commit": "56e9ae982c2fdd00c7c0b9afc49af035470dd310",
+      "committedAt": "2026-09-20T06:10:13+03:00",
+      "license": "Apache-2.0",
+      "files": 507,
+      "treeSha256": "3119a10c288627f26cbfc7f194e9e86e6fd879eba2c1bb9ec65553d2f269b96f"
+    },
+    {
+      "id": "no-ai-slop",
+      "name": "No AI Slop",
+      "repo": "https://github.com/petergyang/no-ai-slop.git",
+      "dir": "upstream/no-ai-slop",
+      "commit": "000650b156983f5159695b441477f4e63b25dc85",
+      "committedAt": "2026-09-01T21:19:00-07:00",
+      "license": "MIT",
+      "files": 14,
+      "treeSha256": "5631aae519bd670c62178dd73e959ae9e78b4790ff81200751028754591ca110"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+node_modules/
+.biswodip/
+strix_runs/
+dist/
+*.tgz
+*.tmp-*
+.DS_Store
+.env
+.env.*
+!.env.example

@@ -1,0 +1,267 @@
+{
+  "$comment": "Biswodip Goj Unified Engineering \u2014 integration manifest. Copyright (c) 2026 Biswodip Goj. Apache-2.0. Upstream projects remain owned by their authors.",
+  "schemaVersion": 1,
+  "packageVersion": "2.2.0",
+  "integrations": [
+    {
+      "id": "taste",
+      "name": "Taste Skill",
+      "repo": "https://github.com/Leonxlnx/taste-skill.git",
+      "homepage": "https://github.com/Leonxlnx/taste-skill",
+      "dir": "taste-skill",
+      "license": "MIT",
+      "licenseFile": "LICENSE",
+      "copyright": "Copyright (c) 2026 Leonxlnx",
+      "required": true,
+      "snapshot": {
+        "commit": "5217fb45be2c0b302f29c9cd31cbd3237501c684",
+        "committedAt": "2026-09-20T18:26:24+02:00"
+      },
+      "expectedPaths": [
+        "LICENSE",
+        "README.md",
+        "skills/taste-skill/SKILL.md",
+        "skills/redesign-skill/SKILL.md"
+      ],
+      "skillsRoot": "skills",
+      "skills": [
+        "design-taste-frontend",
+        "design-taste-frontend-v1",
+        "redesign-existing-projects",
+        "high-end-visual-design",
+        "minimalist-ui",
+        "full-output-enforcement",
+        "industrial-brutalist-ui",
+        "gpt-taste",
+        "stitch-design-taste",
+        "image-to-code",
+        "imagegen-frontend-web",
+        "imagegen-frontend-mobile",
+        "brandkit"
+      ],
+      "upstreamInstall": [
+        "npx skills add https://github.com/Leonxlnx/taste-skill"
+      ],
+      "tool": null
+    },
+    {
+      "id": "emilkowalski",
+      "name": "Emil Kowalski Skills",
+      "repo": "https://github.com/emilkowalski/skills.git",
+      "homepage": "https://github.com/emilkowalski/skills",
+      "dir": "emilkowalski-skills",
+      "license": "MIT",
+      "licenseFile": "LICENSE",
+      "copyright": "Copyright (c) 2026 Emil Kowalski",
+      "required": true,
+      "snapshot": {
+        "commit": "85e8e2363b713506e1d5b6e07a0eb2da66be1bc3",
+        "committedAt": "2026-09-15T17:52:10+02:00"
+      },
+      "expectedPaths": [
+        "LICENSE",
+        "README.md",
+        "skills/emil-design-eng/SKILL.md",
+        "skills/review-animations/SKILL.md"
+      ],
+      "skillsRoot": "skills",
+      "skills": [
+        "emil-design-eng",
+        "animate",
+        "animate-expo",
+        "review-animations",
+        "improve-animations",
+        "find-animation-opportunities",
+        "animation-vocabulary",
+        "apple-design",
+        "pick-ui-library",
+        "mobile-native",
+        "ask-sonner",
+        "prototype",
+        "write-swift"
+      ],
+      "upstreamInstall": [
+        "npx skills@latest add emilkowalski/skills"
+      ],
+      "tool": null
+    },
+    {
+      "id": "headroom",
+      "name": "Headroom",
+      "repo": "https://github.com/headroomlabs-ai/headroom.git",
+      "homepage": "https://github.com/headroomlabs-ai/headroom",
+      "dir": "headroom",
+      "license": "Apache-2.0",
+      "licenseFile": "LICENSE",
+      "noticeFile": "NOTICE",
+      "copyright": "Copyright 2025 Headroom Contributors",
+      "required": true,
+      "snapshot": {
+        "commit": "94206e265203acfd72a3b939e9a964e29175ad50",
+        "committedAt": "2026-09-21T18:47:42-05:00",
+        "version": "0.38.0"
+      },
+      "expectedPaths": [
+        "LICENSE",
+        "NOTICE",
+        "README.md",
+        "pyproject.toml",
+        "headroom"
+      ],
+      "skillsRoot": null,
+      "skills": [],
+      "upstreamInstall": [
+        "uv tool install --python 3.13 \"headroom-ai[all]\"",
+        "pipx install --python python3.13 \"headroom-ai[all]\"",
+        "pip install \"headroom-ai[all]\"",
+        "npm install headroom-ai   # TypeScript SDK only, no CLI"
+      ],
+      "tool": {
+        "command": "headroom",
+        "versionArgs": [
+          "--version"
+        ],
+        "healthArgs": [
+          "doctor"
+        ],
+        "install": [
+          {
+            "requires": "uv",
+            "cmd": [
+              "uv",
+              "tool",
+              "install",
+              "--python",
+              "3.13",
+              "headroom-ai[all]"
+            ]
+          },
+          {
+            "requires": "pipx",
+            "cmd": [
+              "pipx",
+              "install",
+              "--python",
+              "python3.13",
+              "headroom-ai[all]"
+            ]
+          }
+        ],
+        "npmPackage": "headroom-ai"
+      }
+    },
+    {
+      "id": "strix",
+      "name": "Strix",
+      "repo": "https://github.com/usestrix/strix.git",
+      "homepage": "https://github.com/usestrix/strix",
+      "dir": "strix",
+      "license": "Apache-2.0",
+      "licenseFile": "LICENSE",
+      "copyright": "Copyright the Strix authors (usestrix)",
+      "required": true,
+      "snapshot": {
+        "commit": "56e9ae982c2fdd00c7c0b9afc49af035470dd310",
+        "committedAt": "2026-09-20T06:10:13+03:00",
+        "version": "1.6.2"
+      },
+      "expectedPaths": [
+        "LICENSE",
+        "README.md",
+        "AGENTS.md",
+        "pyproject.toml",
+        "skills/penetration-testing-with-strix/SKILL.md"
+      ],
+      "skillsRoot": "skills",
+      "skills": [
+        "penetration-testing-with-strix",
+        "fix-security-vulnerabilities-with-strix",
+        "ci-security-scanning-with-strix",
+        "managed-pentesting-with-strix",
+        "application-security-testing",
+        "web-app-penetration-testing",
+        "api-security-testing",
+        "owasp-top-10-testing",
+        "find-security-vulnerabilities-in-code"
+      ],
+      "upstreamInstall": [
+        "npx skills add usestrix/strix",
+        "pipx install strix-agent",
+        "curl -sSL https://strix.ai/install | bash"
+      ],
+      "tool": {
+        "command": "strix",
+        "versionArgs": [
+          "--version"
+        ],
+        "requiresDocker": true,
+        "install": [
+          {
+            "requires": "pipx",
+            "cmd": [
+              "pipx",
+              "install",
+              "strix-agent"
+            ]
+          },
+          {
+            "requires": "uv",
+            "cmd": [
+              "uv",
+              "tool",
+              "install",
+              "strix-agent"
+            ]
+          }
+        ],
+        "installerUrl": "https://strix.ai/install"
+      }
+    },
+    {
+      "id": "no-ai-slop",
+      "name": "No AI Slop",
+      "repo": "https://github.com/petergyang/no-ai-slop.git",
+      "homepage": "https://github.com/petergyang/no-ai-slop",
+      "dir": "no-ai-slop",
+      "license": "MIT",
+      "licenseFile": "LICENSE",
+      "copyright": "Copyright (c) 2026 Peter Yang",
+      "required": true,
+      "snapshot": {
+        "commit": "000650b156983f5159695b441477f4e63b25dc85",
+        "committedAt": "2026-09-01T21:19:00-07:00"
+      },
+      "expectedPaths": [
+        "LICENSE",
+        "README.md",
+        "skills/no-ai-slop/SKILL.md"
+      ],
+      "skillsRoot": "skills",
+      "skills": [
+        "no-ai-slop"
+      ],
+      "upstreamInstall": [
+        "npx skills add petergyang/no-ai-slop --skill no-ai-slop --global --yes"
+      ],
+      "tool": null
+    }
+  ],
+  "agentSkillDirs": {
+    "claude-code": {
+      "project": ".claude/skills",
+      "global": "~/.claude/skills"
+    },
+    "codex": {
+      "project": ".codex/skills",
+      "global": "~/.codex/skills"
+    },
+    "cursor": {
+      "project": ".cursor/skills",
+      "global": "~/.cursor/skills"
+    },
+    "agents": {
+      "project": ".agents/skills",
+      "global": "~/.agents/skills"
+    }
+  }
+}

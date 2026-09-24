@@ -1,0 +1,9 @@
+# Everything is maintained by Biswodip Goj.
+*                 @Biswadipgoj
+
+# Vendored upstream source must never be edited in a PR — refresh it with
+# `node bin/biswodip.mjs refresh-snapshots` instead.
+/upstream/        @Biswadipgoj
+/LICENSE          @Biswadipgoj
+/NOTICE           @Biswadipgoj
+/THIRD-PARTY-NOTICES.md @Biswadipgoj

@@ -1,0 +1,29 @@
+name: Bug report
+description: Something in the system or its tooling does not work as documented
+labels: ["bug"]
+body:
+  - type: input
+    id: version
+    attributes: { label: Version or commit, placeholder: "2.0.0 / <sha>" }
+    validations: { required: true }
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [installer, detect/verify, security gates, Strix runner, MASTER-PROMPT content, lifecycle/security docs, skill install, packaging, other]
+    validations: { required: true }
+  - type: input
+    id: env
+    attributes: { label: OS, shell and Node version, placeholder: "Windows 11, PowerShell 7.4, Node 20.11" }
+    validations: { required: true }
+  - type: textarea
+    id: repro
+    attributes:
+      label: Exact command and output
+      description: Redact any secret before pasting.
+      render: shell
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes: { label: Expected vs observed }
+    validations: { required: true }

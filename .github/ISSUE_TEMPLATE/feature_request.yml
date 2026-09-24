@@ -1,0 +1,23 @@
+name: Improvement
+description: Propose a gate, procedure, integration or tooling change
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes: { label: What engineering problem does this solve?, description: "Not 'it would be nice' — what goes wrong today." }
+    validations: { required: true }
+  - type: textarea
+    id: proposal
+    attributes: { label: Proposed change }
+    validations: { required: true }
+  - type: textarea
+    id: evidence
+    attributes: { label: How would it be verified?, description: "A gate needs a test; a claim needs evidence." }
+    validations: { required: true }
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Confirm
+      options:
+        - { label: "This does not require editing vendored upstream source", required: true }
+        - { label: "This does not weaken an existing security or evidence rule", required: true }

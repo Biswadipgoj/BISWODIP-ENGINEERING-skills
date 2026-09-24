@@ -1,0 +1,27 @@
+# Biswodip Goj Unified Engineering — GitHub presentation and diff behaviour.
+* text=auto eol=lf
+
+*.sh      text eol=lf
+*.mjs     text eol=lf
+*.ps1     text eol=crlf
+*.md      text eol=lf
+*.json    text eol=lf
+*.svg     text eol=lf
+
+# Vendored upstream source: do not count it in the language statistics, do not
+# show it in diffs by default, and never treat it as this project's own code.
+upstream/**            linguist-vendored
+upstream/**            -diff
+
+# Generated from MASTER-PROMPT.md by `node bin/biswodip.mjs build-skill`.
+skills/**              linguist-generated
+
+# Carried forward verbatim from v1.2.0.
+references/**          linguist-documentation
+lifecycle/**           linguist-documentation
+security/**            linguist-documentation
+reports/**             linguist-documentation
+docs/**                linguist-documentation
+
+# Keep the banner rendering as an image, not a diff blob.
+assets/*.svg           binary

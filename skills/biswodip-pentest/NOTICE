@@ -1,0 +1,43 @@
+BISWODIP GOJ — UNIFIED ENGINEERING
+Copyright (c) 2026 Biswodip Goj
+
+This product includes software developed by Biswodip Goj.
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+ORIGINAL WORK BY BISWODIP GOJ
+-----------------------------
+The following materials in this distribution are original work authored by
+Biswodip Goj and are covered by the Apache License, Version 2.0:
+
+  - MASTER-PROMPT.md and the installable skill built from it
+    (skills/biswodip-unified-engineering/)
+  - the unified agent lifecycle (lifecycle/)
+  - the security deep-dives (security/)
+  - the verification, evidence, scoring and release-gate model
+  - the reference set (references/), including the engineering verification
+    gate catalogue
+  - the integration architecture, manifest and orchestration tooling
+    (integrations/, scripts/, bin/, test/)
+  - the report and evidence templates (reports/)
+  - the original documentation in this repository (README.md, docs/,
+    CHANGELOG.md, SECURITY.md, CONTRIBUTING.md)
+
+THIRD-PARTY WORK
+----------------
+This distribution also contains, unmodified and in their own directories,
+source snapshots of five upstream open-source projects under upstream/.
+Those projects are NOT the work of Biswodip Goj. Their copyright remains with
+their respective authors, and each is redistributed under its own licence with
+its own LICENSE (and NOTICE, where provided) file preserved:
+
+  - upstream/taste-skill          Taste Skill — (c) 2026 Leonxlnx — MIT
+  - upstream/emilkowalski-skills  Emil Kowalski Skills — (c) 2026 Emil Kowalski — MIT
+  - upstream/no-ai-slop           No AI Slop — (c) 2026 Peter Yang — MIT
+  - upstream/headroom             Headroom — (c) 2025 Headroom Contributors — Apache-2.0
+  - upstream/strix                Strix — (c) the Strix authors — Apache-2.0
+
+See THIRD-PARTY-NOTICES.md for the full attribution and the terms that apply
+to each. The "Biswodip Goj" name and branding identify this combined,
+maintained distribution; they do not assert authorship or ownership of any
+upstream project, and no upstream copyright notice, licence or attribution
+may be removed or altered.
