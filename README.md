@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <a href=".github/workflows/ci.yml"><img alt="CI" src="https://github.com/Biswadipgoj/BISWODIP-GOJ-UNIFIED-ENGINEERING/actions/workflows/ci.yml/badge.svg"></a>
+  <a href=".github/workflows/ci.yml"><img alt="CI" src="https://github.com/Biswadipgoj/BISWODIP-ENGINEERING-skills/actions/workflows/ci.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache_2.0-0B1220?style=for-the-badge&labelColor=0B1220&color=6366F1"></a>
   <a href="CHANGELOG.md"><img alt="Version 2.2.0" src="https://img.shields.io/badge/version-2.2.0-0B1220?style=for-the-badge&labelColor=0B1220&color=22D3EE"></a>
   <a href="package.json"><img alt="Node >= 18.17" src="https://img.shields.io/badge/node-%E2%89%A5%2018.17-0B1220?style=for-the-badge&labelColor=0B1220&color=3C873A"></a>
@@ -38,14 +38,14 @@
 
 ## Quick start
 
-**Unzip → push to GitHub → install → type `/dip`.** Full walkthrough: [`START-HERE.md`](START-HERE.md).
+**Clone this repo, install it into a target project, then type `/dip`.** Full walkthrough: [`START-HERE.md`](START-HERE.md).
 
 ```bash
-# install into any project (clones this repo to ~/.biswodip-goj-unified-engineering)
-curl -fsSL https://raw.githubusercontent.com/Biswadipgoj/BISWODIP-GOJ-UNIFIED-ENGINEERING/main/install.sh | bash
+# from anywhere: clone this repo and install into a target project
+curl -fsSL https://raw.githubusercontent.com/Biswadipgoj/BISWODIP-ENGINEERING-skills/main/install.sh | bash
 
 # or
-npx --yes github:Biswadipgoj/BISWODIP-GOJ-UNIFIED-ENGINEERING dip install --root .
+npx --yes github:Biswadipgoj/BISWODIP-ENGINEERING-skills dip install --root .
 ```
 
 Then, in that project:
@@ -64,30 +64,30 @@ Then, in that project:
 Or install the skills alone, straight from this repository:
 
 ```bash
-npx skills add Biswadipgoj/BISWODIP-GOJ-UNIFIED-ENGINEERING                                   # all seven
-npx skills add Biswadipgoj/BISWODIP-GOJ-UNIFIED-ENGINEERING --skill biswodip-security-review  # just one
+npx skills add Biswadipgoj/BISWODIP-ENGINEERING-skills                                   # all seven
+npx skills add Biswadipgoj/BISWODIP-ENGINEERING-skills --skill biswodip-security-review  # just one
 ```
 
 Or clone it and let the installer wire up the upstream projects too:
 
 ```bash
 # 1. From your target project, detect what already exists (nothing is installed yet)
-node /path/to/BISWODIP-GOJ-UNIFIED-ENGINEERING/bin/biswodip.mjs detect --root .
+node /path/to/BISWODIP-ENGINEERING-skills/bin/biswodip.mjs detect --root .
 
 # 2. Clone every upstream repository, verify each one, install the agent skills
-bash /path/to/BISWODIP-GOJ-UNIFIED-ENGINEERING/scripts/install-integrations.sh .
+bash /path/to/BISWODIP-ENGINEERING-skills/scripts/install-integrations.sh .
 
 # 3. Confirm what is installed, against the lock file
-bash /path/to/BISWODIP-GOJ-UNIFIED-ENGINEERING/scripts/verify-integrations.sh . --verbose
+bash /path/to/BISWODIP-ENGINEERING-skills/scripts/verify-integrations.sh . --verbose
 
 # 4. Run the automated security gates
-bash /path/to/BISWODIP-GOJ-UNIFIED-ENGINEERING/scripts/run-security-gates.sh . --project-checks
+bash /path/to/BISWODIP-ENGINEERING-skills/scripts/run-security-gates.sh . --project-checks
 ```
 
 Windows PowerShell:
 
 ```powershell
-& C:\path\to\BISWODIP-GOJ-UNIFIED-ENGINEERING\scripts\install-integrations.ps1 -Root .
+& C:\path\to\BISWODIP-ENGINEERING-skills\scripts\install-integrations.ps1 -Root .
 ```
 
 Then tell your agent: **“Follow MASTER-PROMPT.md for this repository.”** Installed as a skill, it triggers on its own for build, harden, review, audit, pentest and release-gate work.
@@ -127,7 +127,7 @@ Write it at ~70% context, not at 95%. Section 5 (failed attempts) is the one tha
 
 Most AI output looks finished. This system exists to make it *be* finished.
 
-It is a single operating document (`MASTER-PROMPT.md`, §0–§43) plus the procedures, security deep-dives, verification catalogue, tooling and templates an agent needs to take a repository from "it runs" to "it can be explained, verified, monitored and recovered".
+It is a single operating document (`MASTER-PROMPT.md`, §0–§43) plus the procedures, security deep-dives, verification catalogue, tooling and templates an agent needs to take a repository from discovery to release.
 
 **The rules that do the work:**
 
@@ -140,7 +140,7 @@ It is a single operating document (`MASTER-PROMPT.md`, §0–§43) plus the proc
 | Score from evidence | 100 weighted points, hard caps for unresolved criticals, and blockers that override the number. |
 | One honest status | `RELEASE READY` · `RELEASE READY WITH DOCUMENTED ACCEPTED RISKS` · `NOT RELEASE READY` · `BLOCKED — INSUFFICIENT EVIDENCE`. |
 
-**What it refuses to do:** add technology to look sophisticated, invent test results, call a scanner run proof of security, trust a client field, hide a finding, or scan a target you have not been authorized to test.
+**What it refuses to do:** add technology to look sophisticated, invent test results, call a scanner run proof of security, trust a client field, hide a finding, or scan a target you have not been explicitly authorized to test.
 
 ---
 
@@ -156,7 +156,7 @@ Each is cloned at install time **and** bundled here as an exact source snapshot,
 | **Headroom** | [headroomlabs-ai/headroom](https://github.com/headroomlabs-ai/headroom) | Apache-2.0 | Agent context/token compression (Phase 9) |
 | **Strix** | [usestrix/strix](https://github.com/usestrix/strix) | Apache-2.0 | Authorized autonomous pentesting — 9 skills (Phase 11) |
 
-The installer detects what is already present, never reinstalls it blindly, never duplicates a skill across scopes, verifies every checkout (remote URL, expected files, licence file) and records the result in `.biswodip/integrations.lock.json`:
+The installer detects what is already present, never reinstalls it blindly, never duplicates a skill across scopes, verifies every checkout (remote URL, expected files, licence file) and records it in the lock.
 
 ```text
 INTEGRATION | STATUS | VERSION | SOURCE | LOCATION | ACTION TAKEN
@@ -167,7 +167,7 @@ INTEGRATION | STATUS | VERSION | SOURCE | LOCATION | ACTION TAKEN
 ## Repository layout
 
 ```text
-BISWODIP-GOJ-UNIFIED-ENGINEERING/
+BISWODIP-ENGINEERING-skills/
 ├── MASTER-PROMPT.md          # the operating system: §0–§43
 ├── lifecycle/                # 00-bootstrap … 13-release — one procedure per phase
 ├── security/                 # server authority, authorization, financial, webhooks,
@@ -213,7 +213,7 @@ node bin/biswodip.mjs <command> [options]
 
 Docs: [`START-HERE.md`](START-HERE.md) · [`ARCHITECTURE.md`](ARCHITECTURE.md) · [`docs/INSTALL.md`](docs/INSTALL.md) · [`docs/GITHUB.md`](docs/GITHUB.md) · [`docs/CONTEXT-BUDGET.md`](docs/CONTEXT-BUDGET.md)
 
-Useful flags: `--pinned` · `--update` · `--offline` · `--with-tools` · `--agent codex` · `--global` · `--dry-run` · `--only strix` · `--json` · `--strict`. Full list: `node bin/biswodip.mjs help` and [`docs/INSTALL.md`](docs/INSTALL.md).
+Useful flags: `--pinned` · `--update` · `--offline` · `--with-tools` · `--agent codex` · `--global` · `--dry-run` · `--only strix` · `--json` · `--strict`. Full list: `node bin/biswodip.mjs --help`.
 
 ---
 
@@ -228,23 +228,23 @@ Score only from evidence; hard blockers override the number.
 | Reliability | 15 | | Accessibility / responsive UX | 5 |
 | Test / evidence quality | 15 | | Design / interaction | 5 |
 
-Caps: unresolved Critical, authorization bypass, exposed secret or unsafe financial transition → **max 49, blocked**. Unresolved High in an exposed path → **max 69, blocked**. Fabricated or missing critical evidence → **max 59, blocked**.
+Caps: unresolved Critical, authorization bypass, exposed secret or unsafe financial transition → **max 49, blocked**. Unresolved High in an exposed path → **max 69, blocked**. Fabricated or missing evidence still counts as a failure.
 
-Blocked outright by: critical vulnerability · exposed production secret · broken authorization · cross-tenant access · authentication bypass · unsafe financial state transition · known data-loss path · production debug functionality · fabricated evidence. Full list in §33.
+Blocked outright by: critical vulnerability · exposed production secret · broken authorization · cross-tenant access · authentication bypass · unsafe financial state transition · known data exposure or tampering.
 
 ---
 
 ## Authorized testing only
 
-Penetration testing — with Strix or by hand — is permitted **only** against systems you own or are explicitly authorized to test, in a disposable environment, with test identities and provider sandbox instruments. The runner refuses non-loopback targets unless you declare authorization, and it never prints or logs your API key. Keep the written authorization with your evidence. See [`SECURITY.md`](SECURITY.md).
+Penetration testing — with Strix or by hand — is permitted **only** against systems you own or are explicitly authorized to test, in a disposable environment, with test identities and provided scope.
 
 ---
 
 ## Licence and attribution
 
-This system — the operating document, lifecycle, security deep-dives, verification and scoring model, tooling, templates and documentation — is **Copyright (c) 2026 Biswodip Goj**, licensed under **Apache-2.0** ([`LICENSE`](LICENSE), [`NOTICE`](NOTICE)).
+This system — the operating document, lifecycle, security deep-dives, verification and scoring model, tooling, templates and documentation — is **Copyright (c) 2026 Biswodip Goj**, licensed under the Apache License 2.0.
 
-The projects under `upstream/` are **not** the work of Biswodip Goj. They are redistributed unmodified under their own licences, with every copyright, licence and notice file preserved — see [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md). The "Biswodip Goj" name identifies this combined distribution; it asserts nothing over upstream work.
+The projects under `upstream/` are **not** the work of Biswodip Goj. They are redistributed unmodified under their own licences, with every copyright, licence and notice file preserved — see [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).
 
 Verify that claim yourself:
 
