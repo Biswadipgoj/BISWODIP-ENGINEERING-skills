@@ -9,6 +9,7 @@ import {
   PKG_ROOT, IS_WIN, c, log, table, paintStatus, which, run, sleepMs, exists, isDir, readJSON, writeJSON,
   sha256File, hashDir, copyDir, timestamp, readFrontmatter, normalizeRemote, expandHome,
 } from './common.mjs';
+import { getProfile } from './llmconfig.mjs';
 
 export const MANIFEST_PATH = path.join(PKG_ROOT, 'integrations', 'manifest.json');
 export const SNAPSHOT_ROOT = path.join(PKG_ROOT, 'upstream');
@@ -226,7 +227,7 @@ export function detect(opts) {
     node: process.versions.node, platform: `${process.platform}-${process.arch}`,
     git: Boolean(which('git')), npx: Boolean(which('npx')), python: Boolean(which('python3') || which('python')),
     uv: Boolean(which('uv')), pipx: Boolean(which('pipx')), docker: dockerInfo(),
-    STRIX_LLM: process.env.STRIX_LLM ? 'set' : 'missing', LLM_API_KEY: process.env.LLM_API_KEY ? 'set' : 'missing',
+    STRIX_LLM: process.env.STRIX_LLM ? 'set' : getProfile() ? 'set (dip setapi)' : 'missing', LLM_API_KEY: process.env.LLM_API_KEY ? 'set' : getProfile() ? 'set (dip setapi)' : 'missing',
   };
   return { root, installDir: dirs.install, records, self, env, lockFound: Boolean(lock) };
 }

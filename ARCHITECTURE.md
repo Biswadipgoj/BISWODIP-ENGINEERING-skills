@@ -197,7 +197,7 @@ It never reinstalls what is present, never replaces a newer copy with an older o
 | Decision | Why |
 |---|---|
 | A router skill instead of one big skill | 12,917 → 1,365 tokens on trigger. Context is the scarce resource. |
-| Seven skills, each self-contained | A typo fix must not drag a release gate into the window; each installs alone. |
+| Eight skills, each self-contained | A typo fix must not drag a release gate into the window; each installs alone. |
 | Slash commands hold no engineering content | They point at skills, so they cannot drift from the system. |
 | Generated `skills/`, hand-written sources | One source of truth; `verify-package` fails on drift. |
 | Vendored upstream + clone at install | Works offline and air-gapped; still gets live code when online; licences travel with the code. |

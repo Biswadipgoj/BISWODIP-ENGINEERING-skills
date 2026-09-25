@@ -5,6 +5,8 @@
 
 **Biswodip Goj Unified Engineering** is the orchestration and engineering system in this repository; it is licensed under Apache-2.0 (see `LICENSE` and `NOTICE`). The upstream projects below are **not** relicensed and are **not** the work of Biswodip Goj. Each is redistributed unmodified under its own licence, with its own `LICENSE` (and `NOTICE`, where provided) file preserved inside its directory.
 
+The stack catalog (`integrations/catalog.json`) only **references** further projects by URL — nothing from them is bundled or redistributed here. Each keeps its own licence; check it upstream before you depend on one (css.gg, for example, uses a custom licence).
+
 Snapshot commits, tree hashes and file counts are recorded in `upstream/SNAPSHOTS.json` and `integrations/manifest.json`. Verify them at any time with:
 
 ```bash

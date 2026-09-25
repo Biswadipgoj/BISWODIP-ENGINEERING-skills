@@ -3,6 +3,32 @@
 
 All notable changes to this package. Format based on Keep a Changelog; this project uses semantic versioning.
 
+## [2.3.0] — 2026-09-25
+
+`/dip` plans before it builds, and model keys are set once.
+
+### Added
+- **Auto-planning.** `dip plan "<goal>"` scores a 34-project stack catalog (`integrations/catalog.json`) against the
+  repository and the goal and keeps only the few entries that matter (at most six). It picks one scraper per
+  project language, uses fallbacks only when the primary is out, drops web-only libraries for mobile goals, and
+  asks for a choice on vague goals. It writes `.biswodip/PLAN.md` and `plan.json`.
+- **Subagents** in `templates/claude/agents/`: `dip-planner`, `dip-frontend`, `dip-mobile`, `dip-backend`,
+  `dip-quality`, `dip-browser` (jev-ultrafast instead of Playwright, Browser Use as fallback), `dip-infra`.
+  `/dip` now runs them in waves: plan → parallel build → parallel verify → gate.
+- **`/dip-setapi`** and `dip setapi | api show|test|env|clear | exec`: one saved LLM gateway (base URL, key,
+  model, extra tool keys, named profiles) in the user config folder with owner-only permissions. It is injected
+  into each tool under its own variable names (`OPENAI_*`, `ANTHROPIC_*`, `OCR_LLM_*`, `TEXT_MODEL_*`,
+  `STRIX_LLM`/`LLM_API_*`, `DIP_LLM_*`). Values already set in the shell win, and the key is redacted from the
+  command log.
+- `dip catalog`, `dip add <ids>` (project deps and skills; scaffolds, services, hooks and plugins are printed,
+  never run), `/dip:plan`.
+- The `biswodip-orchestrator` skill, `docs/ORCHESTRATION.md`, `docs/LLM-GATEWAY.md`, and `test/orchestration.test.mjs`.
+- `verify-package` checks the catalog (unique ids, GitHub repos, owners that ship, valid fallbacks) and every
+  agent's frontmatter.
+
+### Changed
+- `dip strix`, `detect` and `doctor` use the saved gateway when `STRIX_LLM` / `LLM_API_KEY` are not exported.
+
 ## [2.2.0] — 2026-09-24
 
 One archive to unzip and push, and `/dip` in any project.

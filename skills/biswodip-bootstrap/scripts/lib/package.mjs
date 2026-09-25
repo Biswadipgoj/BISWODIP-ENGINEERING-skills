@@ -28,8 +28,10 @@ export const REQUIRED_TREE = [
   'references/02-master-shipping-gate.md', 'bin/biswodip.mjs', 'handoff.md', 'reports/HANDOFF-TEMPLATE.md',
   'docs/GITHUB.md', 'docs/CONTEXT-BUDGET.md', 'scripts/lib/skills.mjs', 'scripts/lib/handoff.mjs',
   'START-HERE.md', 'ARCHITECTURE.md', 'install.sh', 'install.ps1',
-  'templates/claude/commands/dip.md', 'templates/claude/agents/dip.md',
-  ...['bootstrap', 'security', 'pentest', 'design', 'release', 'handoff'].map((n) => `templates/claude/commands/dip/${n}.md`),
+  'templates/claude/commands/dip.md', 'templates/claude/agents/dip.md', 'templates/claude/commands/dip-setapi.md',
+  'integrations/catalog.json', 'scripts/lib/planner.mjs', 'scripts/lib/llmconfig.mjs', 'docs/ORCHESTRATION.md', 'docs/LLM-GATEWAY.md',
+  ...['dip-planner', 'dip-frontend', 'dip-mobile', 'dip-backend', 'dip-quality', 'dip-browser', 'dip-infra'].map((a) => `templates/claude/agents/${a}.md`),
+  ...['bootstrap', 'security', 'pentest', 'design', 'release', 'handoff', 'plan'].map((n) => `templates/claude/commands/dip/${n}.md`),
   ...SKILLS.flatMap((s) => [`skills/${s.name}/SKILL.md`, `skills-src/${s.name}.md`]),
 ];
 
@@ -174,6 +176,21 @@ export function verifyPackage({ verbose = false } = {}) {
     if (rel.startsWith('commands')) add('commands', `${rel}: has a description`, /^description:\s*\S/m.test(text), '');
   }
   add('commands', 'agent frontmatter names dip', /^name:\s*dip$/m.test(read('templates/claude/agents/dip.md')), '@dip');
+  for (const rel of cmdFiles.filter((f) => f.startsWith('agents/'))) {
+    const fm = readFrontmatter(P('templates', 'claude', rel)) || {};
+    add('commands', `${rel}: name matches file, has description`, fm.name === path.basename(rel, '.md') && Boolean(fm.description), fm.name || 'missing');
+  }
+
+  // 4c. Stack catalog: unique ids, GitHub repos, owners that exist as agents
+  const cat = readJSON(P('integrations', 'catalog.json'), { entries: [], agents: {} });
+  const ids = cat.entries.map((e) => e.id);
+  add('catalog', `ids unique (${ids.length})`, ids.length && new Set(ids).size === ids.length, ids.filter((x, i) => ids.indexOf(x) !== i).join(', '));
+  const badRepo = cat.entries.filter((e) => !/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+$/.test(e.repo || '')).map((e) => e.id);
+  add('catalog', 'every entry has a GitHub repo', !badRepo.length, badRepo.join(', '));
+  const noAgent = cat.entries.filter((e) => !cat.agents[e.agent] || !exists(P('templates', 'claude', 'agents', `${e.agent}.md`))).map((e) => `${e.id}→${e.agent}`);
+  add('catalog', 'every entry is owned by a shipped agent', !noAgent.length, noAgent.join(', '));
+  const badRefs2 = cat.entries.filter((e) => (e.fallbackFor && !ids.includes(e.fallbackFor))).map((e) => e.id);
+  add('catalog', 'fallbacks point at real entries', !badRefs2.length, badRefs2.join(', '));
 
   // 5. Versions agree
   const pj = readJSON(P('package.json'));

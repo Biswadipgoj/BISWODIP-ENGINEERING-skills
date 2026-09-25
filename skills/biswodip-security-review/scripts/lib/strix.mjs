@@ -7,6 +7,7 @@ import net from 'node:net';
 import path from 'node:path';
 import { c, log, which, run, exists, isDir, readJSON, writeJSON, timestamp } from './common.mjs';
 import { dockerInfo, paths } from './core.mjs';
+import { getProfile, toolEnv } from './llmconfig.mjs';
 
 export const MODES = ['quick', 'standard', 'deep'];
 
@@ -42,6 +43,8 @@ export function strixRun(opts) {
   const urls = [].concat(opts.appUrl || []).filter(Boolean);
   const authorized = [].concat(opts.authorizedHost || []).flatMap((s) => String(s).split(','));
   const problems = [];
+  // Shell variables win; otherwise the gateway saved with /dip-setapi fills STRIX_LLM / LLM_API_KEY / LLM_API_BASE.
+  const E = { ...process.env, ...toolEnv(getProfile(), { forIds: ['strix'] }) };
 
   log.title(`Strix — authorized ${mode} assessment`);
   if (!MODES.includes(mode)) problems.push(`--mode must be one of ${MODES.join(', ')}`);
@@ -52,16 +55,16 @@ export function strixRun(opts) {
   let instructionFile = opts.instructionFile ? path.resolve(root, opts.instructionFile) : null;
   if (instructionFile) {
     if (!exists(instructionFile)) problems.push(`instruction file not found: ${instructionFile}`);
-    else if (process.env.LLM_API_KEY && fs.readFileSync(instructionFile, 'utf8').includes(process.env.LLM_API_KEY)) problems.push('instruction file contains LLM_API_KEY — remove the key from the file');
+    else if (E.LLM_API_KEY && fs.readFileSync(instructionFile, 'utf8').includes(E.LLM_API_KEY)) problems.push('instruction file contains LLM_API_KEY — remove the key from the file');
   }
 
-  const env = { strix: which('strix'), docker: dockerInfo(), STRIX_LLM: Boolean(process.env.STRIX_LLM), LLM_API_KEY: Boolean(process.env.LLM_API_KEY) };
+  const env = { strix: which('strix'), docker: dockerInfo(), STRIX_LLM: Boolean(E.STRIX_LLM), LLM_API_KEY: Boolean(E.LLM_API_KEY) };
   log.info(`strix ${env.strix ? 'found' : 'MISSING'} · docker ${env.docker.running ? 'running' : 'NOT running'} · STRIX_LLM ${env.STRIX_LLM ? 'set' : 'missing'} · LLM_API_KEY ${env.LLM_API_KEY ? 'set' : 'missing'}`);
   const blocked = [];
   if (!env.strix) blocked.push('strix CLI not installed (pipx install strix-agent, or install-integrations --with-tools)');
   if (!env.docker.running) blocked.push('Docker is not running');
-  if (!env.STRIX_LLM) blocked.push('STRIX_LLM not set in the environment');
-  if (!env.LLM_API_KEY) blocked.push('LLM_API_KEY not set in the environment');
+  if (!env.STRIX_LLM) blocked.push('STRIX_LLM not set — run /dip-setapi or export it');
+  if (!env.LLM_API_KEY) blocked.push('LLM_API_KEY not set — run /dip-setapi or export it');
 
   const args = ['-n', '-t', targetDir, ...urls.flatMap((u) => ['-t', u]), ...(opts.openapi ? ['-t', path.resolve(root, opts.openapi)] : []),
     '--scan-mode', mode, '--max-budget', String(budget), ...(instructionFile ? ['--instruction-file', instructionFile] : [])];
@@ -82,7 +85,7 @@ export function strixRun(opts) {
 
   const runsDir = path.join(root, 'strix_runs');
   const before = new Set(isDir(runsDir) ? fs.readdirSync(runsDir) : []);
-  const r = run('strix', args, { cwd: root, inherit: true, timeout: 0, logFile: P.commandLog, redact: [process.env.LLM_API_KEY] });
+  const r = run('strix', args, { cwd: root, inherit: true, timeout: 0, env: E, logFile: P.commandLog, redact: [E.LLM_API_KEY] });
   const after = isDir(runsDir) ? fs.readdirSync(runsDir).filter((d) => !before.has(d)) : [];
   const newest = after.map((d) => path.join(runsDir, d)).sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs)[0];
   const runJson = newest ? readJSON(path.join(newest, 'run.json'), null) : null;

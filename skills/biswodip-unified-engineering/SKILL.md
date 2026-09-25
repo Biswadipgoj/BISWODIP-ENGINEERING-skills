@@ -4,7 +4,7 @@ description: Biswodip Goj's evidence-driven engineering system: the laws, the 14
 license: Apache-2.0
 metadata:
   author: Biswodip Goj
-  version: 2.2.0
+  version: 2.3.0
   homepage: https://github.com/Biswadipgoj
 ---
 # Biswodip Goj — Unified Engineering (router)
@@ -56,6 +56,7 @@ Narrowed scope (a PR review, one bug) runs the phases proportionally — say whi
 | Detect/install the five integrations | skill **biswodip-bootstrap** |
 | Evidence matrix, score, release report, the 2,215-gate catalogue | skill **biswodip-release-gate** |
 | Hand work to the next session without losing context | skill **biswodip-handoff** |
+| Plan a goal, pick the few libraries/skills it needs, run subagents, set model keys | skill **biswodip-orchestrator** (`dip plan`, `/dip-setapi`) |
 
 Grep before you read: `grep -n "### Webhooks" references/02-master-shipping-gate.md`. Read a section, not a document. These files are large on purpose so your context does not have to be.
 

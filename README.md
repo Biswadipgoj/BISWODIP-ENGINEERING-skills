@@ -16,7 +16,7 @@
 <p align="center">
   <a href=".github/workflows/ci.yml"><img alt="CI" src="https://github.com/Biswadipgoj/BISWODIP-ENGINEERING-skills/actions/workflows/ci.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/License-Apache_2.0-0B1220?style=for-the-badge&labelColor=0B1220&color=6366F1"></a>
-  <a href="CHANGELOG.md"><img alt="Version 2.2.0" src="https://img.shields.io/badge/version-2.2.0-0B1220?style=for-the-badge&labelColor=0B1220&color=22D3EE"></a>
+  <a href="CHANGELOG.md"><img alt="Version 2.3.0" src="https://img.shields.io/badge/version-2.3.0-0B1220?style=for-the-badge&labelColor=0B1220&color=22D3EE"></a>
   <a href="package.json"><img alt="Node >= 18.17" src="https://img.shields.io/badge/node-%E2%89%A5%2018.17-0B1220?style=for-the-badge&labelColor=0B1220&color=3C873A"></a>
   <a href="integrations/manifest.json"><img alt="5 integrations" src="https://img.shields.io/badge/integrations-5%20vendored-0B1220?style=for-the-badge&labelColor=0B1220&color=8B5CF6"></a>
   <a href="references/02-master-shipping-gate.md"><img alt="2215 gates" src="https://img.shields.io/badge/verification%20gates-2%2C215-0B1220?style=for-the-badge&labelColor=0B1220&color=F59E0B"></a>
@@ -52,7 +52,9 @@ Then, in that project:
 
 | Command | Does |
 |---|---|
-| `/dip` · `/dip harden the login flow` | Routes to the right phase and runs it, with evidence |
+| `/dip` · `/dip android app with login` | Plans the goal, picks the few skills and libraries it needs, runs specialist subagents, verifies with evidence |
+| `/dip-setapi <base-url> <key> <model>` | Saves your LLM gateway once; every tool that needs a model gets it automatically |
+| `/dip:plan <goal>` | Shows the plan only (skills, stack, agents, waves), changes nothing |
 | `/dip:bootstrap` | Detect and install the five integrations |
 | `/dip:security src/api` | Server-authoritative review, a status per control |
 | `/dip:pentest http://127.0.0.1:3000 quick` | Authorized pentest, then the fix loop |
@@ -64,7 +66,7 @@ Then, in that project:
 Or install the skills alone, straight from this repository:
 
 ```bash
-npx skills add Biswadipgoj/BISWODIP-ENGINEERING-skills                                   # all seven
+npx skills add Biswadipgoj/BISWODIP-ENGINEERING-skills                                   # all eight
 npx skills add Biswadipgoj/BISWODIP-ENGINEERING-skills --skill biswodip-security-review  # just one
 ```
 
@@ -98,11 +100,12 @@ Then tell your agent: **“Follow MASTER-PROMPT.md for this repository.”** Ins
 
 ## The skills
 
-Seven skills, each installable on its own. The router carries the law and the map; everything else loads only when its phase runs — so a typo fix does not drag a release gate into your context.
+Eight skills, each installable on its own. The router carries the law and the map; everything else loads only when its phase runs — so a typo fix does not drag a release gate into your context.
 
 | Skill | Use it for | Loads on trigger |
 |---|---|---:|
 | `biswodip-unified-engineering` | The laws, the 14 phases, the routing table — start here | **~1.4k tokens** |
+| `biswodip-orchestrator` | Auto-plan: stack catalog, subagent waves, `/dip-setapi` gateway | ~1.6k |
 | `biswodip-bootstrap` | Detect and install the five integrations without duplicating anything | ~0.8k |
 | `biswodip-security-review` | Secrets, authn, authz, money, webhooks, API, files, privacy, AI features | ~1.3k |
 | `biswodip-pentest` | Authorized Strix run, manual adversarial pass, the fix loop | ~1.3k |
@@ -141,6 +144,28 @@ It is a single operating document (`MASTER-PROMPT.md`, §0–§43) plus the proc
 | One honest status | `RELEASE READY` · `RELEASE READY WITH DOCUMENTED ACCEPTED RISKS` · `NOT RELEASE READY` · `BLOCKED — INSUFFICIENT EVIDENCE`. |
 
 **What it refuses to do:** add technology to look sophisticated, invent test results, call a scanner run proof of security, trust a client field, hide a finding, or scan a target you have not been explicitly authorized to test.
+
+---
+
+## Auto-planning and subagents
+
+`/dip <goal>` runs a deterministic planner over the repository and the goal, and keeps only the **few** entries the goal needs from a 34-project catalog: Motion, Anime.js, Animate.css, Bootstrap, Font Awesome, css.gg, Impeccable, Front-End Checklist, React Native, Expo, Appwrite, Prisma, Redis, Meilisearch, ClickHouse, TiDB, Netdata, Keploy, Open Code Review, Archify, Superpowers, Matt Pocock's skills, the official Claude plugins, jev-ultrafast (the default browser driver, instead of Playwright), Browser Use, Crawlee, Scrapling, n8n, Ruflo, Paperclip, and reference lists. It then runs subagents in waves:
+
+```text
+Plan    dip-planner                  criteria, tasks, one owner per file area
+Build   dip-frontend · dip-mobile · dip-backend · dip-browser · dip-infra   (parallel)
+Verify  dip-quality · dip (security review)                                 (parallel)
+Gate    main agent → fixes → release gate → one status
+```
+
+```bash
+dip plan --root . "android app with login and animations"   # → .biswodip/PLAN.md
+dip add prisma,redis --root .                                # install what the plan picked
+dip setapi --base-url https://openrouter.ai/api/v1 --model <model>   # key prompted hidden
+dip exec --for open-code-review -- ocr …                     # tool runs with its variables filled
+```
+
+Keys live in `~/.config/biswodip/llm.json` (owner-only, never in a project). Details: [`docs/ORCHESTRATION.md`](docs/ORCHESTRATION.md) · [`docs/LLM-GATEWAY.md`](docs/LLM-GATEWAY.md).
 
 ---
 
@@ -207,6 +232,8 @@ node bin/biswodip.mjs <command> [options]
 | `strix` | Guarded pentest: loopback only unless `--authorized-host`, key never printed, verdict read from `run.json` |
 | `doctor` | `detect` plus the exact command that fixes each gap |
 | `handoff` | `init` / `update` / `show` — the six-section handoff file for the next session |
+| `plan` · `catalog` · `add` | Plan a goal against the stack catalog; list it; install entries (manual ones are printed, never run) |
+| `setapi` · `api` · `exec` | Save the LLM gateway; show / test / env / clear it; run a tool with it injected |
 | `skills` | Lists the installable skills and what each costs in context |
 | `verify-package` | Self-check of this package: tree, sections, path resolution, gate count, skill sync, snapshot hashes, licences, SPDX headers, script parsing, secret scan |
 | `build-skill` · `refresh-snapshots` | Maintainer: regenerate the skill; re-clone upstream and update the manifest |
