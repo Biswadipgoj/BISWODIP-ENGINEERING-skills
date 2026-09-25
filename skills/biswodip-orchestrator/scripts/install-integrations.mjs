@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+// SPDX-License-Identifier: Apache-2.0
+// Copyright (c) 2026 Biswodip Goj — Biswodip Goj Unified Engineering
+// Clone EVERY upstream repository, verify it, install agent skills, write the lock file.
+// Usage: node scripts/install-integrations.mjs [root] [options]   (see: node bin/biswodip.mjs help)
+const args = process.argv.slice(2);
+if (args[0] && !args[0].startsWith('-')) args.splice(0, 1, '--root', args[0]);
+process.argv = [process.argv[0], process.argv[1], 'install', ...args];
+await import('../bin/biswodip.mjs');

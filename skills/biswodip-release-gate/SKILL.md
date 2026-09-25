@@ -4,7 +4,7 @@ description: Build the evidence matrix, score the work out of 100 from evidence 
 license: Apache-2.0
 metadata:
   author: Biswodip Goj
-  version: 2.2.0
+  version: 2.3.0
   homepage: https://github.com/Biswadipgoj
 ---
 # Release gate — evidence matrix, score, one honest status

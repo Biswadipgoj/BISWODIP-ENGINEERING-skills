@@ -296,7 +296,8 @@ test('installCommands puts /dip, the sub-commands and @dip into a project', () =
   const d = tmp();
   const res = installCommands(d, {});
   const kinds = res.map((r) => r.kind).sort();
-  assert.deepEqual(kinds, ['/dip', '/dip:bootstrap', '/dip:design', '/dip:handoff', '/dip:pentest', '/dip:release', '/dip:security', '@dip']);
+  assert.deepEqual(kinds, ['/dip', '/dip-setapi', '/dip:bootstrap', '/dip:design', '/dip:handoff', '/dip:pentest', '/dip:plan', '/dip:release', '/dip:security',
+    '@dip', '@dip-backend', '@dip-browser', '@dip-frontend', '@dip-infra', '@dip-mobile', '@dip-planner', '@dip-quality']);
   assert.ok(res.every((r) => r.status === 'INSTALLED'));
   assert.ok(exists(path.join(d, '.claude', 'commands', 'dip.md')));
   assert.ok(exists(path.join(d, '.claude', 'commands', 'dip', 'security.md')));
@@ -392,9 +393,9 @@ test('required tree is present', () => {
   assert.deepEqual(missing, []);
 });
 
-test('all seven skills are built, in sync, and within the context budget', () => {
+test('all eight skills are built, in sync, and within the context budget', () => {
   assert.equal(buildSkills({ check: true }).code, 0, 'run: node bin/biswodip.mjs build-skill');
-  assert.equal(SKILLS.length, 7);
+  assert.equal(SKILLS.length, 8);
   for (const sk of SKILLS) {
     const md = path.join(PKG_ROOT, 'skills', sk.name, 'SKILL.md');
     const fm = readFrontmatter(md);
@@ -412,7 +413,7 @@ test('the router skill stays small and carries the full prompt as a reference, n
   assert.ok(exists(path.join(dir, 'references', 'MASTER-PROMPT.md')), 'full prompt available on demand');
   for (const name of ['biswodip-security-review', 'biswodip-pentest', 'biswodip-handoff']) assert.ok(skillMd.includes(name), `router routes to ${name}`);
   const cat = catalogueTable();
-  assert.equal(cat.length, 7);
+  assert.equal(cat.length, 8);
   assert.ok(cat.every((r) => r.tokens > 0 && r.files > 0));
 });
 

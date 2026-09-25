@@ -4,7 +4,7 @@ description: Write or update handoff.md — goal, current state, active files, c
 license: Apache-2.0
 metadata:
   author: Biswodip Goj
-  version: 2.2.0
+  version: 2.3.0
   homepage: https://github.com/Biswadipgoj
 ---
 # Handoff — write `handoff.md` before the context runs out

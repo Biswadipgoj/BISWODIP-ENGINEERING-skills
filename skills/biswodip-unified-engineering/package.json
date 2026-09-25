@@ -1,6 +1,6 @@
 {
   "name": "biswodip-goj-unified-engineering",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Biswodip Goj's evidence-driven production engineering system for AI coding agents: discover, plan, threat model, implement, verify, attack, fix, regress, score and release-gate a repository \u2014 integrating Taste, Emil Kowalski, No AI Slop, Headroom and Strix.",
   "author": "Biswodip Goj",
   "license": "Apache-2.0",
@@ -56,8 +56,9 @@
     "doctor": "node bin/biswodip.mjs doctor",
     "build-skill": "node bin/biswodip.mjs build-skill",
     "refresh-snapshots": "node bin/biswodip.mjs refresh-snapshots",
-    "test": "node --test test/tooling.test.mjs",
+    "test": "node --test test/tooling.test.mjs test/orchestration.test.mjs",
     "handoff": "node bin/biswodip.mjs handoff",
+    "plan": "node bin/biswodip.mjs plan",
     "skills": "node bin/biswodip.mjs skills"
   },
   "engines": {

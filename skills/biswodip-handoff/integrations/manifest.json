@@ -1,7 +1,7 @@
 {
   "$comment": "Biswodip Goj Unified Engineering \u2014 integration manifest. Copyright (c) 2026 Biswodip Goj. Apache-2.0. Upstream projects remain owned by their authors.",
   "schemaVersion": 1,
-  "packageVersion": "2.2.0",
+  "packageVersion": "2.3.0",
   "integrations": [
     {
       "id": "taste",

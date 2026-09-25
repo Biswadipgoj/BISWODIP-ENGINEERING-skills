@@ -34,7 +34,7 @@ jobs:
         run: node bin/biswodip.mjs verify-package --verbose
 
       - name: Unit tests
-        run: node --test test/tooling.test.mjs
+        run: node --test test/tooling.test.mjs test/orchestration.test.mjs
 
       - name: Installer dry run
         run: node bin/biswodip.mjs install --root . --dry-run
@@ -53,6 +53,9 @@ jobs:
           test -f "$RUNNER_TEMP/scratch/.claude/commands/dip.md"
           test -f "$RUNNER_TEMP/scratch/.claude/commands/dip/security.md"
           test -f "$RUNNER_TEMP/scratch/.claude/agents/dip.md"
+          test -f "$RUNNER_TEMP/scratch/.claude/commands/dip-setapi.md"
+          test -f "$RUNNER_TEMP/scratch/.claude/commands/dip/plan.md"
+          for a in planner frontend mobile backend quality browser infra; do test -f "$RUNNER_TEMP/scratch/.claude/agents/dip-$a.md"; done
 
       - name: Handoff file lifecycle
         shell: bash
@@ -60,6 +63,17 @@ jobs:
           node bin/biswodip.mjs handoff init --root "$RUNNER_TEMP/scratch" --title ci-demo
           node bin/biswodip.mjs handoff update --root "$RUNNER_TEMP/scratch"
           grep -q "## 5) Failed attempts" "$RUNNER_TEMP/scratch/handoff.md"
+
+      - name: Planner and gateway settings
+        shell: bash
+        env:
+          DIP_CONFIG_DIR: ${{ runner.temp }}/dipcfg
+        run: |
+          node bin/biswodip.mjs plan --root "$RUNNER_TEMP/scratch" "android app with login and animations"
+          test -f "$RUNNER_TEMP/scratch/.biswodip/PLAN.md"
+          printf '%s' 'ci-fake-key-000000000000' | node bin/biswodip.mjs setapi --base-url http://127.0.0.1:4000/v1 --model ci-model --api-key-stdin
+          node bin/biswodip.mjs exec -- node -e "process.exit(process.env.OCR_LLM_MODEL === 'ci-model' ? 0 : 1)"
+          if node bin/biswodip.mjs api show | grep -q ci-fake-key; then echo "key printed"; exit 1; fi
 
       - name: Skill catalogue and context budget
         run: node bin/biswodip.mjs skills

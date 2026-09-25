@@ -4,7 +4,7 @@ description: Review or build a UI so it is complete across every state, responsi
 license: Apache-2.0
 metadata:
   author: Biswodip Goj
-  version: 2.2.0
+  version: 2.3.0
   homepage: https://github.com/Biswadipgoj
 ---
 # Design review — complete, accessible, and not obviously AI-made

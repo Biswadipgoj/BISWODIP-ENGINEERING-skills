@@ -13,7 +13,7 @@ export const SKILLS_DIR = path.join(PKG_ROOT, 'skills');
 export const SKILLS_SRC = path.join(PKG_ROOT, 'skills-src');
 export const ROUTER = 'biswodip-unified-engineering';
 const LEGAL = ['LICENSE', 'NOTICE', 'THIRD-PARTY-NOTICES.md'];
-const TOOLING = ['bin', 'scripts', 'integrations/manifest.json', 'package.json'];
+const TOOLING = ['bin', 'scripts', 'integrations/manifest.json', 'integrations/catalog.json', 'package.json'];
 
 /** Soft budget: a SKILL.md above this many characters is flagged (≈ chars/4 tokens). */
 export const SKILL_BUDGET_CHARS = 14000;
@@ -24,6 +24,12 @@ export const SKILLS = [
     title: 'Unified Engineering (router)',
     description: "Biswodip Goj's evidence-driven engineering system: the laws, the 14 phases and the routing table. Use when asked to build, fix, harden, review, audit, pentest or release-gate a repository, or to make it production-ready. Loads the detail for one phase at a time instead of the whole system.",
     parts: [...LEGAL, ...TOOLING, { from: 'MASTER-PROMPT.md', to: 'references/MASTER-PROMPT.md' }, 'references', 'lifecycle', 'security', 'reports', 'integrations', 'docs/INSTALL.md'],
+  },
+  {
+    name: 'biswodip-orchestrator',
+    title: 'Auto-plan and subagent orchestration',
+    description: 'Plan a goal before building: pick the few skills and stack entries it needs from a catalog (animation, CSS, icons, React Native, Expo, Appwrite, Prisma, Redis, Meilisearch, ClickHouse, crawling, jev-ultrafast browser automation, testing and review tools), split the work across specialist subagents in waves, and fill tool API keys from the gateway saved with /dip-setapi. Use for /dip, for any multi-part feature or new app, or when asked which libraries or skills to use.',
+    parts: [...LEGAL, ...TOOLING, 'docs/ORCHESTRATION.md', 'docs/LLM-GATEWAY.md'],
   },
   {
     name: 'biswodip-bootstrap',

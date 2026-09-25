@@ -4,7 +4,7 @@ description: Detect and install the five upstream integrations (Taste, Emil Kowa
 license: Apache-2.0
 metadata:
   author: Biswodip Goj
-  version: 2.2.0
+  version: 2.3.0
   homepage: https://github.com/Biswadipgoj
 ---
 # Bootstrap — detect and install the integrations
