@@ -13,8 +13,8 @@ export const DEFAULT_MAX = 6;
 
 // Goal → this system's own phase skills. The router always loads.
 const SKILL_RULES = [
-  ['biswodip-security-review', ['security', 'secure', 'harden', 'auth', 'authorization', 'permission', 'vulnerab', 'secret', 'payment', 'webhook', 'audit']],
-  ['biswodip-pentest', ['pentest', 'penetration', 'exploit', 'attack']],
+  ['biswodip-security-review', ['security', 'secure', 'harden', 'auth', 'authorization', 'permission', 'vulnerab', 'secret', 'payment', 'webhook', 'audit', 'codex', 'sast', 'cloudflare', 'waf', 'ddos', 'zero-trust']],
+  ['biswodip-pentest', ['pentest', 'penetration', 'exploit', 'attack', 'sqlmap', 'sqli', 'sql injection', 'ctf', 'hacking', 'offensive']],
   ['biswodip-design-review', ['design', 'ui', 'ux', 'accessib', 'a11y', 'responsive', 'animation', 'polish', 'landing', 'page', 'screen', 'creative']],
   ['biswodip-release-gate', ['release', 'production ready', 'production-ready', 'ship', 'score', 'grade', 'launch']],
   ['biswodip-handoff', ['handoff', 'hand off', 'continue later', 'new session']],

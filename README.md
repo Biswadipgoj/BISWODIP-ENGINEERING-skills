@@ -149,7 +149,7 @@ It is a single operating document (`MASTER-PROMPT.md`, §0–§43) plus the proc
 
 ## Auto-planning and subagents
 
-`/dip <goal>` runs a deterministic planner over the repository and the goal, and keeps only the **few** entries the goal needs from a 34-project catalog: Motion, Anime.js, Animate.css, Bootstrap, Font Awesome, css.gg, Impeccable, Front-End Checklist, React Native, Expo, Appwrite, Prisma, Redis, Meilisearch, ClickHouse, TiDB, Netdata, Keploy, Open Code Review, Archify, Superpowers, Matt Pocock's skills, the official Claude plugins, jev-ultrafast (the default browser driver, instead of Playwright), Browser Use, Crawlee, Scrapling, n8n, Ruflo, Paperclip, and reference lists. It then runs subagents in waves:
+`/dip <goal>` runs a deterministic planner over the repository and the goal, and keeps only the **few** entries the goal needs from a **46-repository capability registry** (`repositories/INDEX.md`, planner source `integrations/catalog.json`). All 37 specification repositories are registered — jev-ultrafast (the default browser driver, instead of Playwright), Motion, Anime.js, Animate.css, Bootstrap, Font Awesome, css.gg, Impeccable, Front-End Checklist, React Native, Expo, Appwrite, Prisma, Redis, Meilisearch, ClickHouse, TiDB, Netdata, Keploy, Open Code Review, Archify, Superpowers, Matt Pocock's skills, the official Claude plugins, Ruflo, Paperclip, Crawlee, Scrapling, n8n, Kubernetes The Hard Way, Awesome Scalability, Codex Security, SQLMap, Awesome Hacking, the Cloudflare Security Audit Skill, Awesome Claude Code and App Ideas — plus design-engineering skills (Emil Design Eng, Make Interfaces Better, React Doctor, Fixing Accessibility, 12 Principles of Animation, shadcn/ui), `agent-reach` for research, and `browser-use` as the jev-ultrafast fallback. It then runs subagents in waves:
 
 ```text
 Plan    dip-planner                  criteria, tasks, one owner per file area
@@ -157,6 +157,8 @@ Build   dip-frontend · dip-mobile · dip-backend · dip-browser · dip-infra   
 Verify  dip-quality · dip (security review)                                 (parallel)
 Gate    main agent → fixes → release gate → one status
 ```
+
+Every registry entry carries `required`, `planner_triggers`, `integration_type` and `security_notes`. Registered is not the same as installed: the planner evaluates all of them and activates only what the goal needs. Security entries are permission-aware — `sqlmap` is authorized-only, and `codex-security`, `awesome-hacking` and `cloudflare-security-audit` are references whose output is data, never instruction.
 
 ```bash
 dip plan --root . "android app with login and animations"   # → .biswodip/PLAN.md
@@ -199,12 +201,14 @@ BISWODIP-ENGINEERING-skills/
 │                             #   data protection, attack catalogue
 ├── references/               # carried forward from v1.2.0, verbatim — including the
 │                             #   2,215-item verification gate catalogue
-├── integrations/             # manifest.json + one brief per integration + Strix runner
+├── integrations/             # manifest.json + one brief per integration + the 46-repo catalog.json
+├── repositories/             # Repository Capability Registry — INDEX.md + catalog.json
 ├── upstream/                 # exact source snapshots of all five upstream repositories
-├── scripts/                  # detect / install / verify / run-security-gates (.sh .ps1 .mjs)
+├── scripts/                  # detect / install / verify / run-security-gates / build-repository-registry
 ├── bin/biswodip.mjs          # single cross-platform entry point
 ├── reports/                  # release report, evidence matrix, finding, exception,
 │                             #   threat model, authorization matrix, integration record
+├── site/                     # animated portfolio site (Next.js + Framer Motion, Vercel-ready)
 ├── skills/                   # 7 generated installable skills (built from MASTER-PROMPT.md + skills-src/)
 ├── skills-src/               # the body of each skill (frontmatter is generated)
 ├── templates/claude/         # /dip commands + @dip agent, copied into your project's .claude/

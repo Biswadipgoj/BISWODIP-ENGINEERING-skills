@@ -35,6 +35,7 @@
     "references",
     "reports",
     "integrations",
+    "repositories",
     "scripts",
     "bin",
     "docs",
@@ -59,7 +60,8 @@
     "test": "node --test test/tooling.test.mjs test/orchestration.test.mjs",
     "handoff": "node bin/biswodip.mjs handoff",
     "plan": "node bin/biswodip.mjs plan",
-    "skills": "node bin/biswodip.mjs skills"
+    "skills": "node bin/biswodip.mjs skills",
+    "registry": "node scripts/build-repository-registry.mjs ."
   },
   "engines": {
     "node": ">=18.17"
